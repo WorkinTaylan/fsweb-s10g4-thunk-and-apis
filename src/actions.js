@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const GET_FAVS_FROM_LS = "GET_FAVS_FROM_LS";
 export const FAV_ADD = "FAV_ADD";
 export const FAV_REMOVE = "FAV_REMOVE";
@@ -18,4 +20,12 @@ export const removeFav = (id) => {
 }
 
 export const fetchAnother = () => dispatch => {
-}
+  dispatch({type:'FETCH_LOADING', payload:true});
+  axios
+  .get("https://official-joke-api.appspot.com/random_joke")
+  .then((res)=>{
+    dispatch({type:'FETCH_SUCCESS', payload:res.data})
+    dispatch({type:'FETCH_LOADING', payload:false})
+  })
+  .catch((error)=>console.log(error))
+};

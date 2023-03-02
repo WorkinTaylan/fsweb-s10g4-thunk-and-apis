@@ -31,11 +31,16 @@ export function myReducer(state = initial, action) {
       return state;
 
     case FETCH_SUCCESS:
-      return state;
+      return {
+        ...state,
+        current:action.payload
+      };
 
     case FETCH_LOADING:
-      return state;
-
+      return {
+        ...state,
+        loading:action.payload
+      }
     case FETCH_ERROR:
       return state;
 

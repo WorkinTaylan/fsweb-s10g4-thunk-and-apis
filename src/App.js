@@ -2,10 +2,13 @@ import React from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
+import { useDispatch,useSelector } from "react-redux";
+import { fetchAnother, FETCH_LOADING,FETCH_SUCCESS } from "./actions";
 
 export default function App() {
-  const loading = false;
-  const current = null;
+  const dispatch=useDispatch();
+  const loading = useSelector((depo)=>depo.loading);
+  const current = useSelector((depo)=>depo.current);
   const favs = [];
 
   function addToFavs() {
@@ -39,6 +42,7 @@ export default function App() {
 
           <div className="flex gap-3 justify-end py-3">
             <button
+              onClick={()=>dispatch(fetchAnother())}
               className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
             >
               Başka bir tane
