@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   FAV_ADD,
   FAV_REMOVE,
+  REMOVE_ALL,
   FETCH_SUCCESS,
   FETCH_LOADING,
   FETCH_ERROR,
@@ -52,6 +53,10 @@ export function myReducer(state = initial, action) {
           ...state,
           favs:removed
         }
+     case REMOVE_ALL:
+      return {
+        favs: [],
+      }   
 
     case FETCH_SUCCESS:
       return {

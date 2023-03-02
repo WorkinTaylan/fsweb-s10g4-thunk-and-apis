@@ -61,6 +61,6 @@ Bu projede kullanmak için öncelikle bir API seçmelisiniz. [Bu adresten](https
 
 ### Esnek Görevler
 
-- [ ] Proje stillerini kendi istediğiniz şekilde değiştirmeye çalışın.
+- [*] Proje stillerini kendi istediğiniz şekilde değiştirmeye çalışın.
 
-- [ ] LocalStorage içerisindeki verileri sıfırlama opsiyonu ekleyin.
+- [?] LocalStorage içerisindeki verileri sıfırlama opsiyonu ekleyin.

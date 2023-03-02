@@ -5,7 +5,7 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
 import { useDispatch,useSelector } from "react-redux";
-import { addFav, fetchAnother, FETCH_LOADING,FETCH_SUCCESS } from "./actions";
+import { addFav, fetchAnother} from "./actions";
 
 export default function App() {
   const dispatch=useDispatch();
@@ -22,15 +22,15 @@ export default function App() {
         <NavLink
           to="/"
           exact
-          className="py-3 px-6 "
-          activeClassName="bg-white shadow-sm text-blue-600"
+          className="py-3 px-6 text-yellow-100 hover:text-white "
+          activeClassName="shadow-xl text-white"
         >
           Rastgele
         </NavLink>
         <NavLink
           to="/favs"
-          className="py-3 px-6 "
-          activeClassName="bg-white shadow-sm text-blue-600"
+          className="py-3 px-6 text-yellow-100 hover:text-white"
+          activeClassName="shadow-xl text-white"
         >
           Favoriler
         </NavLink>
@@ -38,20 +38,20 @@ export default function App() {
 
       <Switch>
         <Route exact path="/">
-          {loading && <div className="bg-white p-6 text-center shadow-md">YÜKLENİYOR</div>}
+          {loading && <div className="bg-yellow-100 font-bold text-red-600 font-mono p-6 text-center shadow-md">HAZIR MISIN?</div>}
           {current && <Item data={current} />}
           {error&& <div>ERROR</div>}
           <div className="flex gap-3 justify-end py-3">
             <button
               onClick={()=>dispatch(fetchAnother())}
-              className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
+              className="select-none px-4 py-2 border border-yellow-100 text-yellow-100 hover:text-white opacity-80 hover:opacity-100"
             >
               Başka bir tane
             </button>
             <button
               disabled={current===null}
               onClick={()=>dispatch(addFav(current))}
-              className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
+              className="select-none px-4 py-2 border border-yellow-100 text-yellow-100  hover:border-yellow-100 hover:text-white opacity-80 hover:opacity-100"
             >
               Favorilere ekle
             </button>
@@ -64,7 +64,7 @@ export default function App() {
               ? favs.map((item) => (
                 <FavItem key={item.id} id={item.id} setup={item.setup} punchline={item.punchline} />
               ))
-              : <div className="bg-white p-6 text-center shadow-md">Henüz bir favoriniz yok</div>
+              : <div className="bg-red-900 p-6 text-white font-mono text-center shadow-md">Henüz bir favoriniz yok</div>
             }
           </div>
         </Route>
