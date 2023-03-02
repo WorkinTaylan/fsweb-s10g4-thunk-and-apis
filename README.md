@@ -55,9 +55,9 @@ Bu projede kullanmak için öncelikle bir API seçmelisiniz. [Bu adresten](https
 
 - [*] Projenize `react-toastify` paketini ekleyin.
 
-- [ ] Gerekli ayarlamaları yapın ve bir öge favorilere eklendikten sonra bir başarı toast mesajı görüntüleyin.
+- [*] Gerekli ayarlamaları yapın ve bir öge favorilere eklendikten sonra bir başarı toast mesajı görüntüleyin.
 
-- [ ] Bildirim kaybolmaya yakınken, API'dan tekrar bir öge isteyin.
+- [?] Bildirim kaybolmaya yakınken, API'dan tekrar bir öge isteyin.
 
 ### Esnek Görevler
 

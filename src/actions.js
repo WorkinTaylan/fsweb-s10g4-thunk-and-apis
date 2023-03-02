@@ -28,4 +28,4 @@ export const fetchAnother = () => dispatch => {
     dispatch({type:'FETCH_LOADING', payload:false})
   })
   .catch((error)=>console.log(error))
-};
+}

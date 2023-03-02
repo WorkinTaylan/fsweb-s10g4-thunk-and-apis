@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
@@ -9,12 +11,13 @@ export default function App() {
   const dispatch=useDispatch();
   const loading = useSelector((depo)=>depo.loading);
   const current = useSelector((depo)=>depo.current);
+  const error=useSelector((depo)=>depo.error);
   const favs = useSelector((depo=>depo.favs));
 
-  
 
   return (
     <div className="wrapper max-w-xl mx-auto px-4">
+     
       <nav className="flex text-2xl pb-6 pt-8 gap-2 justify-center">
         <NavLink
           to="/"
@@ -37,7 +40,7 @@ export default function App() {
         <Route exact path="/">
           {loading && <div className="bg-white p-6 text-center shadow-md">YÜKLENİYOR</div>}
           {current && <Item data={current} />}
-
+          {error&& <div>ERROR</div>}
           <div className="flex gap-3 justify-end py-3">
             <button
               onClick={()=>dispatch(fetchAnother())}
@@ -66,6 +69,7 @@ export default function App() {
           </div>
         </Route>
       </Switch>
+      <ToastContainer autoClose={2000}/>
     </div>
   );
 }

@@ -1,3 +1,6 @@
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   FAV_ADD,
   FAV_REMOVE,
@@ -11,7 +14,7 @@ const initial = {
   favs: [],
   current: null,
   error: null,
-  loading: true,
+  loading: false,
 };
 
 function writeFavsToLocalStorage(state) {
@@ -33,15 +36,21 @@ export function myReducer(state = initial, action) {
       if(state.favs.some((joke)=>joke.id===newFav.id)){
         return state
       }
+      const updatedFavs=[...state.favs, newFav]; //...states olmazsa sadece eklemek istediğini basıyo ve önceden listeye atılanları göstermiyo. Liste hep 1 elemanlı.
+      writeFavsToLocalStorage({favs:updatedFavs})
+      toast.success("Yes you have it")
       return {
-         ...state,
-      favs:[...state.favs, newFav]
+        ...state,
+      favs:updatedFavs,
       };
 
     case FAV_REMOVE:
-    
+      const removed=state.favs.filter((item)=>item.id!==action.payload)
+      writeFavsToLocalStorage({favs:removed})
+      toast.warn("Removed it")
         return {
-          favs:state.favs.filter((item)=>item.id!==action.payload)
+          ...state,
+          favs:removed
         }
 
     case FETCH_SUCCESS:
@@ -56,7 +65,10 @@ export function myReducer(state = initial, action) {
         loading:action.payload
       }
     case FETCH_ERROR:
-      return state;
+      return {
+        ...state,
+        error:action.payload
+      }
 
     case GET_FAVS_FROM_LS:
       return state;
