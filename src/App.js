@@ -3,17 +3,15 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
 import { useDispatch,useSelector } from "react-redux";
-import { fetchAnother, FETCH_LOADING,FETCH_SUCCESS } from "./actions";
+import { addFav, fetchAnother, FETCH_LOADING,FETCH_SUCCESS } from "./actions";
 
 export default function App() {
   const dispatch=useDispatch();
   const loading = useSelector((depo)=>depo.loading);
   const current = useSelector((depo)=>depo.current);
-  const favs = [];
+  const favs = useSelector((depo=>depo.favs));
 
-  function addToFavs() {
-  }
-
+  
 
   return (
     <div className="wrapper max-w-xl mx-auto px-4">
@@ -48,7 +46,8 @@ export default function App() {
               Başka bir tane
             </button>
             <button
-              onClick={addToFavs}
+              disabled={current===null}
+              onClick={()=>dispatch(addFav(current))}
               className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
             >
               Favorilere ekle
@@ -60,7 +59,7 @@ export default function App() {
           <div className="flex flex-col gap-3">
             {favs.length > 0
               ? favs.map((item) => (
-                <FavItem key={item.key} id={item.key} title={item.activity} />
+                <FavItem key={item.id} id={item.id} setup={item.setup} punchline={item.punchline} />
               ))
               : <div className="bg-white p-6 text-center shadow-md">Henüz bir favoriniz yok</div>
             }

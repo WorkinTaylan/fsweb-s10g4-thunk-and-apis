@@ -39,13 +39,13 @@ Bu projede kullanmak için öncelikle bir API seçmelisiniz. [Bu adresten](https
 
 * [*] `actions.js` içerisindeki `fetchAnother` isimli action creator async olmalı ve seçtiğiniz API'dan veri almalı. Derste öğrendiklerinizi kullanarak bu actionu oluşturun ve içerisindeki farklı durumlarda farklı actionlar dispatch edin.
 
-* [ ] Uygulamadaki diğer actionlar neler? Tespit edin ve gerekli reducer ve actionları oluşturun.
+* [*] Uygulamadaki diğer actionlar neler? Tespit edin ve gerekli reducer ve actionları oluşturun.
 
-* [ ] `Item.js` ve `FavItem.js` dosyasını, seçtiğiniz API'den gelen veri yapısına uygun olarak düzenleyin ve stilleyin. Tailwind kullanmak zorunda değilsiniz.
+* [*] `Item.js` ve `FavItem.js` dosyasını, seçtiğiniz API'den gelen veri yapısına uygun olarak düzenleyin ve stilleyin. Tailwind kullanmak zorunda değilsiniz.
 
-* [ ] `Store` içerisindeki verileri kullanmak istediğiniz yerlerde kullanmak için gerekli kısımları ekleyin.
+* [*] `Store` içerisindeki verileri kullanmak istediğiniz yerlerde kullanmak için gerekli kısımları ekleyin.
 
-* [ ] Sayfadaki `Favorilere Ekle` kısmında kullanmak için gerekli actionu ve reducer bölümünü ekleyin.
+* [*] Sayfadaki `Favorilere Ekle` kısmında kullanmak için gerekli actionu ve reducer bölümünü ekleyin.
 
 ### Görev 3: Favorilenenleri LocalStorage içerisine eklemek/buradan kullanmak
 
