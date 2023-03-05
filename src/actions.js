@@ -31,5 +31,7 @@ export const fetchAnother = () => dispatch => {
     dispatch({type:'FETCH_SUCCESS', payload:res.data})
     dispatch({type:'FETCH_LOADING', payload:false})
   })
-  .catch((error)=>console.log(error))
+  .catch((error)=>{console.log(error)
+  dispatch({type:'FETCH_LOADING', payload:false})
+})
 }

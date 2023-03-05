@@ -21,14 +21,7 @@ function FavItem({id,setup,punchline }) {
         </button>
      
       </div>
-      <div className="mt-5 text-white ">
-        <button
-        onClick={() => {dispatch(removeAll()) }}
-        className="transition-all px-3 py-2 block text-sm rounded bg-rose-700 text-white opacity-30 group-hover:opacity-100"
-      >
-      Hepsini Çıkar
-        </button>
-      </div>
+      
     </div>
   );
 }

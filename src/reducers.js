@@ -30,7 +30,7 @@ export function myReducer(state = initial, action) {
   switch (action.type) {
     case FAV_ADD:
       let newFav={
-        id:action.payload,
+        id:action.payload.id,
         setup:action.payload.setup,
         punchline:action.payload.punchline
       }
@@ -39,7 +39,7 @@ export function myReducer(state = initial, action) {
       }
       const updatedFavs=[...state.favs, newFav]; //...states olmazsa sadece eklemek istediğini basıyo ve önceden listeye atılanları göstermiyo. Liste hep 1 elemanlı.
       writeFavsToLocalStorage({favs:updatedFavs})
-      toast.success("Yes you have it")
+      toast.success("Yes!! you have it")
       return {
         ...state,
       favs:updatedFavs,
@@ -54,8 +54,11 @@ export function myReducer(state = initial, action) {
           favs:removed
         }
      case REMOVE_ALL:
+      const RemovedAllFavs=[]
+      writeFavsToLocalStorage({favs:RemovedAllFavs})
       return {
-        favs: [],
+        ...state,
+        favs: RemovedAllFavs,
       }   
 
     case FETCH_SUCCESS:
@@ -76,7 +79,7 @@ export function myReducer(state = initial, action) {
       }
 
     case GET_FAVS_FROM_LS:
-      return state;
+      return {...state, favs:readFavsFromLocalStorage()}
 
     default:
       return state;
