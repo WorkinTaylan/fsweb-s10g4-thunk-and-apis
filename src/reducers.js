@@ -19,7 +19,7 @@ const initial = {
 };
 
 function writeFavsToLocalStorage(state) {
-  localStorage.setItem("s10g4", JSON.stringify(state.favs));
+  localStorage.setItem("s10g4", JSON.stringify(state));
 }
 
 function readFavsFromLocalStorage() {
@@ -29,25 +29,20 @@ function readFavsFromLocalStorage() {
 export function myReducer(state = initial, action) {
   switch (action.type) {
     case FAV_ADD:
-      let newFav={
-        id:action.payload.id,
-        setup:action.payload.setup,
-        punchline:action.payload.punchline
-      }
-      if(state.favs.some((joke)=>joke.id===newFav.id)){
-        return state
-      }
-      const updatedFavs=[...state.favs, newFav]; //...states olmazsa sadece eklemek istediğini basıyo ve önceden listeye atılanları göstermiyo. Liste hep 1 elemanlı.
-      writeFavsToLocalStorage({favs:updatedFavs})
-      toast.success("Yes!! you have it")
-      return {
-        ...state,
-      favs:updatedFavs,
-      };
-
+      if(state.favs.filter(item=> item===action.payload).length<1){
+        const newState={
+          ...state,
+          favs:[...state.favs,action.payload]
+        }
+        writeFavsToLocalStorage(newState.favs)
+        toast.success("Yes!! you have it")
+      return newState }
+      else{
+        return state};
+   
     case FAV_REMOVE:
       const removed=state.favs.filter((item)=>item.id!==action.payload)
-      writeFavsToLocalStorage({favs:removed})
+      writeFavsToLocalStorage(removed)
       toast.warn("Removed it")
         return {
           ...state,
@@ -55,7 +50,7 @@ export function myReducer(state = initial, action) {
         }
      case REMOVE_ALL:
       const RemovedAllFavs=[]
-      writeFavsToLocalStorage({favs:RemovedAllFavs})
+      writeFavsToLocalStorage(RemovedAllFavs)
       return {
         ...state,
         favs: RemovedAllFavs,
@@ -64,7 +59,8 @@ export function myReducer(state = initial, action) {
     case FETCH_SUCCESS:
       return {
         ...state,
-        current:action.payload
+        current:action.payload,
+        loading:false
       };
 
     case FETCH_LOADING:
@@ -75,11 +71,24 @@ export function myReducer(state = initial, action) {
     case FETCH_ERROR:
       return {
         ...state,
-        error:action.payload
+        error:action.payload,
+        loading:action.payload
       }
 
     case GET_FAVS_FROM_LS:
-      return {...state, favs:readFavsFromLocalStorage()}
+      let localdenData;
+      if(!readFavsFromLocalStorage()){
+        localdenData={
+          ...state,
+          favs:initial.favs
+      };
+      writeFavsToLocalStorage(initial.favs)}
+      else{
+      localdenData={
+        ...state,
+        favs:readFavsFromLocalStorage()
+      }}
+      return localdenData
 
     default:
       return state;
